@@ -5,31 +5,23 @@ import Arrow from '../../assets/Arrow.jsx'
 function Banner() {
   return (
     <div className="bannerParentDiv">
-      <div className="bannerChildDiv">
-        <div className="menuBar">
-          <div className="categoryMenu">
+      <div className="bannerChildDiv m-2">
+        <div className="menuBar ml-5">
+          <div className="flex font-medium text-sm gap-3 mr-3 cursor-pointer">
             <span>ALL CATEGORIES</span>
             <Arrow></Arrow> 
           </div>
-          <div className="otherQuickOptions">
-            <span>Cars</span>
-            <span>Motorcy...</span>
-            <span>Mobile Ph...</span>
-            <span>For Sale:Houses & Apart...</span>
-            <span>Scoot...</span>
-            <span>Commercial & Other Ve...</span>
-            <span>For Rent: House & Apart...</span>
+          <div className="flex justify-evenly w-4/5 text-sm">
+            <span className='cursor-pointer'>Cars</span>
+            <span className='cursor-pointer'>Motorcycles</span>
+            <span className='cursor-pointer'>Mobile Phones</span>
+            <span className='cursor-pointer'>For Sale: Houses & Apartments</span>
+            <span className='cursor-pointer'>Scooters</span>
+            <span className='cursor-pointer'>Commercial & Other Vehicles</span>
+            <span className='cursor-pointer'>For Rent: Houses & Apartments</span>
           </div>
         </div>
-        <div className="banner p-3">
-          <img
-            style={{ width: 1370, height: 200 }}
-            src="../../../Images/banner copy.png"
-            alt=""
-          />
-        </div>
       </div>
-      
     </div>
   );
 }

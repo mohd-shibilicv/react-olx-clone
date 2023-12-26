@@ -1,60 +1,41 @@
-import React from 'react';
-
-import Heart from '../../assets/Heart.jsx';
+import React, { useState, useEffect } from 'react';
 import './Post.css';
+import Post from './Post.jsx';
 
 function Posts() {
+  const [products, setProducts] = useState([]);
+  const [productCount, setProductCount] = useState(8);
+  
+  const handleLoadMore = () => {
+    setProductCount(prevCount => prevCount + 4);
+  };
+
+  useEffect(() => {
+    fetch(`https://fakestoreapi.com/products?limit=${productCount}`)
+      .then(res => res.json())
+      .then(json => setProducts(json));
+  }, [productCount]);
 
   return (
     <div className="postParentDiv">
-      <div className="moreView">
-        <div className="heading">
-          <span>Quick Menu</span>
-          <span>View more</span>
+      <div className="recommendations p-10 w-full">
+        <div className="heading mb-5">
+          <span className='font-semibold'>Fresh recommendations</span>
         </div>
-        <div className="cards">
-          <div
-            className="card"
-          >
-            <div className="favorite">
-              <Heart></Heart>
-            </div>
-            <div className="image">
-              <img src="../../../Images/R15V3.jpg" alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>Tue May 04 2021</span>
-            </div>
+        <div className="cards flex flex-wrap gap-3">
+          {products.map((product, id) => (
+            <Post key={id} product={product} />
+          ))}
+        </div>
+        {productCount < 20 && (
+          <div className="flex mx-auto justify-center p-3" id='loadmore'>
+            <button className="p-1 m-3 hover:bg-gray-900 border-2 border-gray-900 rounded font-medium" onClick={handleLoadMore}>
+              <div className='rounded p-2 -m-[2px] bg-white'>
+                Load more
+              </div>
+            </button>
           </div>
-        </div>
-      </div>
-      <div className="recommendations">
-        <div className="heading">
-          <span>Fresh recommendations</span>
-        </div>
-        <div className="cards">
-          <div className="card">
-            <div className="favorite">
-              <Heart></Heart>
-            </div>
-            <div className="image">
-              <img src="../../../Images/R15V3.jpg" alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; 250000</p>
-              <span className="kilometer">Two Wheeler</span>
-              <p className="name"> YAMAHA R15V3</p>
-            </div>
-            <div className="date">
-              <span>10/5/2021</span>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
